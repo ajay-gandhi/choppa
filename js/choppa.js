@@ -72,12 +72,12 @@ Choppa.prototype.drop = function () {
   // Animate movement
   bomb.animate({
     top: '+=400',
-    left: '+=20'
+    left: '+=10'
   }, {
     duration: 6000,
     specialEasing: {
       top: 'linear',
-      left: 'bomb'
+      left: 'bombLeft'
     },
     complete: function () {
       bomb.remove();
@@ -128,7 +128,7 @@ Choppa.prototype.bind = function () {
  * Create a new easing function for bombs
  */
 $.extend(jQuery.easing, {
-  bomb: function (x, t, b, c, d) {
+  bombLeft: function (x, t, b, c, d) {
     return Math.pow(x, 0.25);
   }
 });
