@@ -10,7 +10,7 @@
   <script src="js/land.js"></script>
   <script>
   var land = new Land();
-  var choppa = new Choppa();
+  var choppa = new Choppa(land);
   $(document).ready(function () {
     var land_el = land.render($('#game'));
     choppa.render(land_el);

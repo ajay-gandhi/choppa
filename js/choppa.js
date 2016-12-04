@@ -2,7 +2,8 @@
 /**
  * Choppa class. Represents the chopper itself and its actions.
  */
-function Choppa () {
+function Choppa (land) {
+  this.land = land;
   this.choppa_el = false;
   this.is_reloading = false;
 }
@@ -61,20 +62,25 @@ Choppa.prototype.animate_mvmt = function (should) {
  * Drops a bomb
  */
 Choppa.prototype.drop = function () {
+  var hm = 7;
+  var choppa_pos = this.choppa_el.position();
+  var init_x = choppa_pos.left + 10;
+  // Ignore if outside
+  if (init_x + hm < 0 || init_x + hm > 400) return;
+
   var bomb = $('<div class="bomb"></div>');
   bomb.css({
-    top: this.choppa_el.position().top,
-    left: this.choppa_el.position().left
+    top: choppa_pos.top,
+    left: init_x
   });
-  console.log(bomb.css('top'), bomb.css('left'));
   this.choppa_el.parent().append(bomb);
 
   // Animate movement
   bomb.animate({
     top: '+=400',
-    left: '+=10'
+    left: '+=' + hm
   }, {
-    duration: 6000,
+    duration: 4000,
     specialEasing: {
       top: 'linear',
       left: 'bombLeft'
@@ -83,6 +89,28 @@ Choppa.prototype.drop = function () {
       bomb.remove();
     }
   });
+
+  // Compute which tower(s) gets hit
+  var hits = compute_bomb_hit(init_x);
+  var towers = this.land.towers;
+  if (hits.length > 1) {
+    var main_hit = towers[hits[0]] > towers[hits[1]] ? hits.shift() : hits.pop();
+    var second_hit = hits.pop();
+    if (towers[main_hit] - 2 < towers[second_hit]) {
+      // Tower heights are close, hit both
+      var second_power = 2 - towers[main_hit] + towers[second_hit];
+      var main_power = 3 - second_power;
+      this.land.hit(main_hit, main_power);
+      this.land.hit(second_hit, second_power);
+
+    // Too far, just hit main tower
+    } else {
+      this.land.hit(main_hit, 3);
+    }
+
+  } else {
+    this.land.hit(hits[0], 3);
+  }
 }
 
 /**
@@ -132,3 +160,29 @@ $.extend(jQuery.easing, {
     return Math.pow(x, 0.25);
   }
 });
+
+/**
+ * Computes which tower(s) will be hit given an x position
+ */
+var compute_bomb_hit = function (xpos) {
+  xpos += $('.bomb').width() * 2 / 3;
+  var loc = xpos / $('.choppa-container').width() * 16;
+  var idx = Math.floor(loc);
+
+  var hits = [idx];
+  // If in between, hits two
+  if (idx * 25 + 5 > xpos) {
+    hits.push(idx - 1);
+  } else if ((idx + 1) * 25 - 5 < xpos) {
+    hits.push(idx + 1);
+  }
+  return hits;
+}
+
+
+
+
+
+
+
+
