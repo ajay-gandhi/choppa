@@ -1,0 +1,28 @@
+
+.choppa-container {
+  display: inline-block;
+  width: 400px;
+  height: 404px;
+  border: 1px solid #330000;
+  padding: 0;
+}
+.choppa-container * {
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+
+.choppa-container .col {
+  display: inline-block;
+  width: 25px;
+  height: 400px;
+}
+.choppa-container .block {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 23px;
+  height: 23px;
+  border-radius: 3px;
+  border: 1px solid #000000;
+  background-color: #cc0000;
+}

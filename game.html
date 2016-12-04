@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Choppa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/choppa.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="js/choppa.js"></script>
+  <script src="js/land.js"></script>
+  <script>
+  var land = new Land();
+  var choppa = new Choppa();
+  $(document).ready(function () {
+    land.render($('#game'));
+  });
+  </script>
+</head>
+<body>
+  <div id="game"></div>
+</body>
+</html>
