@@ -24,11 +24,14 @@
   width: 25px;
   height: 12px;
   background-color: #cc0000;
+  overflow: none;
 }
-.choppa-container .choppa .bomb {
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
+.choppa-container .bomb {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #cc0000;
 }
 
 /**
