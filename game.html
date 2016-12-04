@@ -12,7 +12,9 @@
   var land = new Land();
   var choppa = new Choppa();
   $(document).ready(function () {
-    land.render($('#game'));
+    var land_el = land.render($('#game'));
+    choppa.render(land_el);
+    choppa.start();
   });
   </script>
 </head>

@@ -10,6 +10,7 @@ function Land () {
   this.towers = fy_shuffle(TOWERS).map(function (n) {
     return (new Array(n)).fill(true);
   });
+  this.game_el = false;
 }
 
 /**
@@ -28,6 +29,7 @@ Land.prototype.render = function (parent) {
   }
 
   parent.append(this.game_el);
+  return this.game_el;
 }
 
 /**

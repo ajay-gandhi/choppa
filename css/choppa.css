@@ -1,10 +1,12 @@
 
 .choppa-container {
+  position: relative;
   display: inline-block;
   width: 400px;
   height: 404px;
-  border: 1px solid #330000;
+  border: 1px solid #440000;
   padding: 0;
+  overflow: hidden;
 }
 .choppa-container * {
   padding: 0;
@@ -12,12 +14,32 @@
   color: white;
 }
 
+/**
+ * Choppa
+ */
+.choppa-container .choppa {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 25px;
+  height: 12px;
+  background-color: #cc0000;
+}
+.choppa-container .choppa .bomb {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+/**
+ * Land
+ */
 .choppa-container .col {
   display: inline-block;
   width: 25px;
   height: 400px;
 }
-.choppa-container .block {
+.choppa-container .col .block {
   display: inline-block;
   vertical-align: bottom;
   width: 23px;
